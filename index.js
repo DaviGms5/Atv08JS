@@ -3,15 +3,17 @@ let numRodadas = 5;
 let nome = prompt("Digite seu nome: ");
 
 console.log(`\n Bem-vindo ao Jogo do Milhão, ${nome}!\n`);
-let opcao = prompt("Você deseja: [1] Jogar, [2] Sair: ");
-
-if(opcao ==2)
+while(true)
 {
-    process.exit(0);
-}
+    let opcao = prompt("Você deseja: [1] Jogar, [2] Sair: ");
 
-while(opcao ==1)
-{
+    if(opcao != 1)
+    {
+        console.log("Até a próxima!!");
+        return false;
+    }
+
+
     const todasPerguntas = [
     {
         pergunta: "Qual é o maior país em extensão territorial do mundo?",
@@ -91,12 +93,12 @@ while(opcao ==1)
     ];
 
     // Embaralhar perguntas
-    function embaralhamentoPerguntas(array) 
+    function embaralhamentoPerguntas(vetor) 
     {
-    for (let i = array.length - 1; i > 0; i--) 
+    for (let i = vetor.length - 1; i > 0; i--) 
         {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        [vetor[i], vetor[j]] = [vetor[j], vetor[i]];
     }
     }
 
@@ -112,7 +114,7 @@ while(opcao ==1)
         const rodada = i + 1;
         const pergunta = perguntasSelecionadas[i];
 
-        console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i].toLocaleString('pt-BR')}`);
+        console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i]}`);
         console.log(pergunta.pergunta);
         pergunta.opcoes.forEach(op => console.log(op));
         
@@ -120,7 +122,7 @@ while(opcao ==1)
         if (resposta === 'p') 
         {
             console.log(`\n Você decidiu parar! Sai do jogo com R$ ${premioAtual}`);
-            process.exit();
+            break;
         }
         if (resposta === pergunta.resposta) 
             {
@@ -156,13 +158,10 @@ while(opcao ==1)
         {
             console.log("Resposta errada!");
             console.log(`A resposta correta era: ${pergunta.resposta}`);
-            console.log(`\n Fim de jogo, ${nome}. Você sai com R$ ${garantido.toLocaleString('pt-BR')}.`);
+            console.log(`\n Fim de jogo, ${nome}. Você sai com R$ ${garantido}.`);
             console.log(`"Você saiu na rodada ${rodada}!", faltaram ${numRodadas-rodada}!!`);
+            break;
         }
     }
-
-    // Premiações fixas
-
-
-    console.log(`\n Parabéns, ${nome}! Você terminou com R$ ${premioAtual.toLocaleString('pt-BR')} em prêmios.`);
+    console.log(`\n Parabéns, ${nome}! Você terminou com R$ ${premioAtual} em prêmios.`);
 }

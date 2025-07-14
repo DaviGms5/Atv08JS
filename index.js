@@ -1,18 +1,16 @@
 const prompt = require('prompt-sync')();
 let numRodadas = 5;
 let nome = prompt("Digite seu nome: ");
+let premioAtual = 0;
+
 
 console.log(`\n Bem-vindo ao Jogo do Milhão, ${nome}!\n`);
 while(true)
 {
-    let opcao = prompt("Você deseja: [1] Jogar, [2] Sair: ");
-
-    if(opcao != 1)
+    if (menu() === false)
     {
-        console.log("Até a próxima!!");
-        return false;
+        break;
     }
-
 
     const todasPerguntas = [
     {
@@ -91,77 +89,89 @@ while(true)
         resposta: "b"
     }
     ];
-
+    
     // Embaralhar perguntas
-    function embaralhamentoPerguntas(vetor) 
-    {
-    for (let i = vetor.length - 1; i > 0; i--) 
-        {
-        const j = Math.floor(Math.random() * (i + 1));
-        [vetor[i], vetor[j]] = [vetor[j], vetor[i]];
-    }
-    }
-
     embaralhamentoPerguntas(todasPerguntas);
     const perguntasSelecionadas = todasPerguntas.slice(0, 5);
-
-    const premios = [1000, 5000, 10000, 50000, 1000000];
-    let premioAtual = 0;
-    let garantido = 0;
-
-    for (let i = 0; i < perguntasSelecionadas.length; i++) 
+    premiacao(premioAtual);
+    
+    function embaralhamentoPerguntas(vetor) 
     {
-        const rodada = i + 1;
-        const pergunta = perguntasSelecionadas[i];
-
-        console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i]}`);
-        console.log(pergunta.pergunta);
-        pergunta.opcoes.forEach(op => console.log(op));
-        
-        const resposta = prompt("Sua resposta (a, b, c ou p): ").toLowerCase();
-        if (resposta === 'p') 
+        for (let i = vetor.length - 1; i > 0; i--) 
         {
-            console.log(`\n Você decidiu parar! Sai do jogo com R$ ${premioAtual}`);
-            break;
-        }
-        if (resposta === pergunta.resposta) 
-            {
-            console.log(" Resposta correta!");
-            premioAtual = premios[i];
-            
-            if(rodada === 2)
-            {
-                garantido = 5000;
-                console.log("Você garantiu o prêmio mínimo de R$ 5.000!");
-            }
-            if (rodada === 3) 
-            {
-                garantido = 10000;
-                console.log("Você garantiu o prêmio mínimo de R$ 10.000!");
-            }
-            
-            if (rodada === 4) 
-            {
-                garantido = 0;
-                console.log("Você perdeu todo o valor!");
-
-            }
-
-            if (rodada === 5) 
-            {
-                console.log("Você venceu o Jogo do Milhão e ganhou R$ 1.000.000!");
-                opcao ==1;
-            }
-
-        } 
-        else 
-        {
-            console.log("Resposta errada!");
-            console.log(`A resposta correta era: ${pergunta.resposta}`);
-            console.log(`\n Fim de jogo, ${nome}. Você sai com R$ ${garantido}.`);
-            console.log(`"Você saiu na rodada ${rodada}!", faltaram ${numRodadas-rodada}!!`);
-            break;
+            const j = Math.floor(Math.random() * (i + 1));
+            [vetor[i], vetor[j]] = [vetor[j], vetor[i]];
         }
     }
-    console.log(`\n Parabéns, ${nome}! Você terminou com R$ ${premioAtual} em prêmios.`);
+    function menu()
+    {
+        let opcao = prompt("Você deseja: [1] Jogar, [2] Sair: ");
+        if(opcao != 1)
+        {
+            console.log("Até a próxima!!");
+            return false;
+        }
+    }
+    function premiacao(premioAtual)
+    {
+        const premios = [1000, 5000, 10000, 50000, 1000000];
+        let garantido = 0;
+
+        for (let i = 0; i < perguntasSelecionadas.length; i++) 
+        {
+            const rodada = i + 1;
+            const pergunta = perguntasSelecionadas[i];
+
+            console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i]}`);
+            console.log(pergunta.pergunta);
+            pergunta.opcoes.forEach(op => console.log(op));
+            
+            const resposta = prompt("Sua resposta (a, b, c ou p): ").toLowerCase();
+            if (resposta === 'p') 
+            {
+                console.log(`\n Você decidiu parar! Sai do jogo com R$ ${premioAtual}`);
+                break;
+            }
+
+            if (resposta === pergunta.resposta) 
+            {
+                console.log(" Resposta correta!");
+                premioAtual = premios[i];
+            
+                if(rodada === 2)
+                {
+                    garantido = 5000;
+                    console.log("Você garantiu o prêmio mínimo de R$ 5.000!");
+                }
+
+                if (rodada === 3) 
+                {
+                    garantido = 10000;
+                    console.log("Você garantiu o prêmio mínimo de R$ 10.000!");
+                }
+                
+                if (rodada === 4) 
+                {
+                    garantido = 0;
+                    console.log("Você perdeu todo o valor!");
+
+                }
+
+                if (rodada === 5) 
+                {
+                    console.log("Você venceu o Jogo do Milhão e ganhou R$ 1.000.000!");
+                    opcao ==1;
+                }
+            } 
+            else 
+            {
+                console.log("Resposta errada!");
+                console.log(`A resposta correta era: ${pergunta.resposta}`);
+                console.log(`\n Fim de jogo, ${nome}. Você sai com R$ ${garantido}.`);
+                console.log(`"Você saiu na rodada ${rodada}!", faltaram ${numRodadas-rodada}!!`);
+                break;
+            }
+            console.log(`\n Parabéns, ${nome}! Você terminou com R$ ${premioAtual} em prêmios.`);
+        }
+    }
 }

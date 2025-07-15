@@ -93,8 +93,6 @@ while(true)
     // Embaralhar perguntas
     embaralhamentoPerguntas(todasPerguntas);
     const perguntasSelecionadas = todasPerguntas.slice(0, 5);
-    
-
     premiacao(premioAtual);
     
     function embaralhamentoPerguntas(vetor) 
@@ -124,7 +122,7 @@ while(true)
             const rodada = i + 1;
             const pergunta = perguntasSelecionadas[i];
 
-            console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i]}`);
+            console.log(`\n Jogador ${nome}, Rodada ${rodada} - Valendo R$ ${premios[i]}`);
             console.log(pergunta.pergunta);
             console.log(`Se parar, você receberá ${premioAtual}`);
             console.log(`Se perder, você receberá ${premioAtual/2}`);

@@ -93,6 +93,8 @@ while(true)
     // Embaralhar perguntas
     embaralhamentoPerguntas(todasPerguntas);
     const perguntasSelecionadas = todasPerguntas.slice(0, 5);
+    
+
     premiacao(premioAtual);
     
     function embaralhamentoPerguntas(vetor) 
@@ -124,6 +126,8 @@ while(true)
 
             console.log(`\n Rodada ${rodada} - Valendo R$ ${premios[i]}`);
             console.log(pergunta.pergunta);
+            console.log(`Se parar, você receberá ${premioAtual}`);
+            console.log(`Se perder, você receberá ${premioAtual/2}`);
             pergunta.opcoes.forEach(op => console.log(op));
             
             const resposta = prompt("Sua resposta (a, b, c ou p): ").toLowerCase();

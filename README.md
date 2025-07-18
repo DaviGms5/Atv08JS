@@ -23,8 +23,6 @@ Os premios são entre 2000 a 1000000 (Não é dinheiro real), dependendo do núm
 
 Como executar: Você deve instalar o node.js, instalar o npm a partir do terminal com o comando npm install prompt-sync, digitar npm start no terminal e digitar seu nome e algumas informações pedidas. Assim que digitar, o jogo irá começar.
 
-
-
 Créditos: 
 https://arthurporto.notion.site/07-Javascript-cb539285c3b9410485790ff0743095f0
 https://www.codecademy.com/article/getting-user-input-in-node-js
@@ -36,7 +34,4 @@ https://www.w3schools.com/js/js_array_methods.asp
 https://www.w3schools.com/js/tryit.asp?filename=tryjs_array_remove
 
 
-Licença do projeto: Este projeto está licenciado sob a Licença <a href="LISENSE.MD">MIT</a>
-
-
-
+Licença do projeto: Este projeto está licenciado sob a Licença MIT (Licença está nos arquivos do projeto)

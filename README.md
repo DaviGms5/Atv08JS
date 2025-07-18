@@ -1,5 +1,5 @@
 # Atv08JS
-Davi Gomes Mendes
+<h2> Davi Gomes Mendes </h2>
 Regras do jogo: O jogador deve responder corretamente a uma sequência de perguntas de múltipla escolha.
 Cada pergunta correta aumenta o valor acumulado, até o prêmio máximo de 1 milhão de reais.
 O jogador pode desistir a qualquer momento e levar o valor acumulado.
